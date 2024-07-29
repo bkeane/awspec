@@ -17,6 +17,11 @@ module Awspec::Type
       resource_via_client.timeout
     end
 
+    def resource_policy
+      check_existence
+      @resource_policy ||= lambda_client.get_policy({ function_name: id }).policy
+    end
+
     def has_tag?(tag_key, tag_value)
       all_tags = select_all_tags_by_function_arn(id)
       all_tags.any? do |k, v|
