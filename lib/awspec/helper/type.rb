@@ -10,7 +10,7 @@ module Awspec
       require 'awspec/type/account_attribute'
 
       TYPES = %w[
-        alb alb_listener alb_target_group ami apigateway autoscaling_group
+        alb alb_listener alb_target_group ami apigateway apigatewayv2 autoscaling_group
         batch_compute_environment batch_job_definition batch_job_queue cloudtrail
         cloudwatch_alarm cloudwatch_event directconnect_virtual_interface
         ebs ec2 ecr_repository ecs_cluster ecs_container_instance ecs_service ecs_task_definition

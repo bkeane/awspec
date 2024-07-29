@@ -42,6 +42,7 @@ require 'awspec/helper/finder/cloudformation'
 require 'awspec/helper/finder/ssm_parameter'
 require 'awspec/helper/finder/codebuild'
 require 'awspec/helper/finder/apigateway'
+require 'awspec/helper/finder/apigatewayv2'
 require 'awspec/helper/finder/kinesis'
 require 'awspec/helper/finder/batch'
 require 'awspec/helper/finder/eks'
@@ -104,6 +105,7 @@ module Awspec::Helper
     include Awspec::Helper::Finder::Cloudformation
     include Awspec::Helper::Finder::Codebuild
     include Awspec::Helper::Finder::Apigateway
+    include Awspec::Helper::Finder::ApigatewayV2
     include Awspec::Helper::Finder::Kinesis
     include Awspec::Helper::Finder::Batch
     include Awspec::Helper::Finder::Eks
@@ -153,6 +155,7 @@ module Awspec::Helper
       cloudformation_client: Aws::CloudFormation::Client,
       codebuild_client: Aws::CodeBuild::Client,
       apigateway_client: Aws::APIGateway::Client,
+      apigatewayv2_client: Aws::ApiGatewayV2::Client,
       kinesis_client: Aws::Kinesis::Client,
       batch_client: Aws::Batch::Client,
       eks_client: Aws::EKS::Client,
@@ -188,12 +191,12 @@ module Awspec::Helper
 
     CLIENTS.each do |method_name, client|
       define_method method_name do
-        unless methods.include? "@#{method_name}"
-          instance_variable_set(
-            "@#{method_name}",
-            Awspec::Helper::ClientWrap.new(client.new(CLIENT_OPTIONS))
-          )
-        end
+        return if methods.include? "@#{method_name}"
+
+        instance_variable_set(
+          "@#{method_name}",
+          Awspec::Helper::ClientWrap.new(client.new(CLIENT_OPTIONS))
+        )
       end
     end
   end

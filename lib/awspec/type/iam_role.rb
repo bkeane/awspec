@@ -19,6 +19,13 @@ module Awspec::Type
       end
     end
 
+    def has_tag?(tag_key, tag_value)
+      resource_tags = iam_client.list_role_tags(role_name: resource_via_client.role_name).tags
+      resource_tags.any? do |tag|
+        tag.key == tag_key && tag.value == tag_value
+      end
+    end
+
     def has_inline_policy?(policy_name, document = nil)
       return has_any_inline_policies? unless policy_name
 

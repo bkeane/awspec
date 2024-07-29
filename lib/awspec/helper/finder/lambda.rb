@@ -33,6 +33,11 @@ module Awspec::Helper
           response.functions
         end.flatten
       end
+
+      def select_all_tags_by_function_arn(function_arn)
+        res = lambda_client.list_tags({ resource: function_arn })
+        res.tags
+      end
     end
   end
 end

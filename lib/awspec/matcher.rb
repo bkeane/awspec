@@ -93,3 +93,6 @@ require 'awspec/matcher/have_env_var_value'
 
 # ManagedPrefixList
 require 'awspec/matcher/have_cidr'
+
+# ApiGatewayV2
+require 'awspec/matcher/have_route_key'

@@ -62,6 +62,13 @@ module Awspec::Type
       end
     end
 
+    def has_tag?(tag_key, tag_value)
+      resource_tags = iam_client.list_policy_tags(policy_arn: resource_via_client.arn).tags
+      resource_tags.any? do |tag|
+        tag.key == tag_key && tag.value == tag_value
+      end
+    end
+
     def has_policy_document?(document)
       res = iam_client.get_policy_version({
                                             policy_arn: resource_via_client.arn,
