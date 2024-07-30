@@ -21,6 +21,13 @@ module Awspec::Helper
         selected.single_resource(id)
       end
 
+      def select_all_resource_policy_statements(id)
+        policy = lambda_client.get_policy({ function_name: id })
+        return [] if policy.policy.nil?
+
+        JSON.parse(policy.policy)['Statement']
+      end
+
       def select_event_source_by_function_arn(function_arn)
         res = lambda_client.list_event_source_mappings({
                                                          function_name: function_arn
