@@ -12,6 +12,17 @@ module Awspec::Type
       @id ||= resource_via_client.api_id
     end
 
+    def has_target?(integration_uri)
+      routes = find_routes(id)
+      routes.any? do |r|
+        next if r.target.nil?
+        integration_id = r.target.split('/')[-1]
+        integration = find_integration(id, integration_id)
+        return false if integration.nil?
+        return integration.integration_uri == integration_uri
+      end
+    end
+
     def has_route_key?(route_key, integration_uri)
       routes = find_routes(id)
 

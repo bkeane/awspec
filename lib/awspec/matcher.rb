@@ -96,3 +96,4 @@ require 'awspec/matcher/have_cidr'
 
 # ApiGatewayV2
 require 'awspec/matcher/have_route_key'
+require 'awspec/matcher/have_target'
