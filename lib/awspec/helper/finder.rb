@@ -18,6 +18,7 @@ require 'awspec/helper/finder/s3'
 require 'awspec/helper/finder/autoscaling'
 require 'awspec/helper/finder/ebs'
 require 'awspec/helper/finder/elb'
+require 'awspec/helper/finder/eventbridge'
 require 'awspec/helper/finder/firehose'
 require 'awspec/helper/finder/lambda'
 require 'awspec/helper/finder/iam'
@@ -81,6 +82,7 @@ module Awspec::Helper
     include Awspec::Helper::Finder::Autoscaling
     include Awspec::Helper::Finder::Ebs
     include Awspec::Helper::Finder::Elb
+    include Awspec::Helper::Finder::EventBridge
     include Awspec::Helper::Finder::Lambda
     include Awspec::Helper::Finder::Iam
     include Awspec::Helper::Finder::Kms
@@ -132,6 +134,7 @@ module Awspec::Helper
       autoscaling_client: Aws::AutoScaling::Client,
       elb_client: Aws::ElasticLoadBalancing::Client,
       elbv2_client: Aws::ElasticLoadBalancingV2::Client,
+      eventbridge_client: Aws::EventBridge::Client,
       lambda_client: Aws::Lambda::Client,
       iam_client: Aws::IAM::Client,
       kms_client: Aws::KMS::Client,
